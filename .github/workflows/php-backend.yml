@@ -1,4 +1,7 @@
 name: PHP backend checks
+concurrency:
+  group: php-backend-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 on:
   push:
     branches: [main, feature/yalla-php-backend]
