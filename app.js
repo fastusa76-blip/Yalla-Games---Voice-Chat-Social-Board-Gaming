@@ -74,7 +74,7 @@ orderForm.addEventListener("submit", async event => {
     showOrderResult(error.message + " Please check that the PHP backend is deployed and try again.", true);
   } finally {
     submit.disabled = false;
-    submit.innerHTML = 'Continue to WhatsApp <span>↗</span>';
+    submit.innerHTML = 'Submit order request <span>↗</span>';
   }
 });
 
