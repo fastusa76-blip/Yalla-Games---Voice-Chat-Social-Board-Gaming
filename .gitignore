@@ -33,3 +33,10 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# PHP backend secrets and local environment
+.env
+.env.*
+!.env.example
+config.php
+/config.local.php
