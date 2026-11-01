@@ -30,7 +30,7 @@ function text_lower(string $value): string {
 function clean_text(mixed $value, int $max): string {
     if (!is_string($value)) return '';
     $value = trim(preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/u', '', $value) ?? '');
-    return text_slice($value, $max);
+    return function_exists('mb_substr') ? mb_substr($value, 0, $max, 'UTF-8') : substr($value, 0, $max);
 }
 function db(): PDO {
     static $pdo = null;
