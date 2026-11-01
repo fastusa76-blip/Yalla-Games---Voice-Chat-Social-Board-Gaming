@@ -62,14 +62,14 @@
     <section class="order-modal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
       <button class="modal-close" id="closeModal" aria-label="Close order form">×</button>
       <p class="eyebrow">LET'S GET YOUR ORDER STARTED</p><h2 id="orderTitle">Make your move<span>.</span></h2>
-      <p class="modal-intro">Share a few details. We'll prepare your order message for WhatsApp so our team can confirm availability and pricing.</p>
+      <p class="modal-intro">Share your details. We'll save your request and give you a private reference to track its confirmation. You can then contact our team on WhatsApp.</p>
       <form id="orderForm">
         <label for="customerName">Your name</label><input id="customerName" name="name" autocomplete="name" required placeholder="Enter your name">
         <label for="customerPhone">Your WhatsApp number</label><input id="customerPhone" name="phone" autocomplete="tel" required placeholder="+92 3XX XXXXXXX">
         <label for="gameChoice">What would you like?</label><input id="gameChoice" name="game" required placeholder="Game or product name">
         <div class="form-row"><div><label for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="1" max="99" value="1" required></div><div><label for="emailAddress">Email (optional)</label><input id="emailAddress" name="email" type="email" placeholder="you@example.com"></div></div>
         <label for="orderNotes">Extra details (optional)</label><textarea id="orderNotes" name="notes" rows="3" placeholder="Any preferences or questions?"></textarea>
-        <button class="button form-submit" type="submit">Continue to WhatsApp <span>↗</span></button>
+        <button class="button form-submit" type="submit">Submit order request <span>↗</span></button>
         <p class="form-footnote">No payment is taken here. Your order is not confirmed until Yalla Games replies.</p>
       </form>
       <div id="orderResult" class="order-result" role="status" hidden></div>
