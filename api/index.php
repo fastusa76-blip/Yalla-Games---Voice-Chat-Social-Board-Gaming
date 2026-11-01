@@ -21,10 +21,16 @@ function body_json(): array {
     if (!is_array($data)) respond(400, ['ok' => false, 'error' => 'Invalid JSON request body.']);
     return $data;
 }
+function text_slice(string $value, int $max): string {
+    return function_exists('mb_substr') ? mb_substr($value, 0, $max, 'UTF-8') : substr($value, 0, $max);
+}
+function text_lower(string $value): string {
+    return function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
+}
 function clean_text(mixed $value, int $max): string {
     if (!is_string($value)) return '';
     $value = trim(preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/u', '', $value) ?? '');
-    return mb_substr($value, 0, $max, 'UTF-8');
+    return text_slice($value, $max);
 }
 function db(): PDO {
     static $pdo = null;
@@ -81,7 +87,8 @@ $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 try {
     if ($action === 'health' && $method === 'GET') {
-        db()->query('SELECT 1');
+        db()->query('SELECT 1 FROM orders LIMIT 1');
+        db()->query('SELECT 1 FROM api_rate_limits LIMIT 1');
         respond(200, ['ok' => true, 'service' => 'yalla-games-api', 'database' => 'connected']);
     }
 
@@ -129,7 +136,7 @@ try {
         $data = body_json();
         $message = clean_text($data['message'] ?? null, 500);
         if ($message === '') respond(422, ['ok' => false, 'error' => 'Please enter a message.']);
-        $q = mb_strtolower($message, 'UTF-8');
+        $q = text_lower($message);
         if (preg_match('/order|buy|purchase|place/', $q)) {
             $reply = 'To place an order, use the order form and enter your name, WhatsApp number, game and quantity. You will receive a private order reference to check its status.';
         } elseif (preg_match('/contact|email|whatsapp|number|phone/', $q)) {
