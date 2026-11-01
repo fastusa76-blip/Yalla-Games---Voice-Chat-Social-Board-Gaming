@@ -72,6 +72,17 @@
         <button class="button form-submit" type="submit">Continue to WhatsApp <span>↗</span></button>
         <p class="form-footnote">No payment is taken here. Your order is not confirmed until Yalla Games replies.</p>
       </form>
+      <div id="orderResult" class="order-result" role="status" hidden></div>
+      <div class="status-check">
+        <h3>Already placed an order?</h3>
+        <p>Use your order reference and private access token to check its latest status.</p>
+        <form id="statusForm">
+          <label for="statusReference">Order reference</label><input id="statusReference" required placeholder="YG-YYMMDD-XXXXXXXX">
+          <label for="statusToken">Private access token</label><input id="statusToken" type="password" autocomplete="off" placeholder="Paste your private token">
+          <button class="button" type="submit">Check order status</button>
+          <p id="statusResult" role="status"></p>
+        </form>
+      </div>
     </section>
   </div>
 
