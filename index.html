@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101018">
+  <meta name="description" content="Yalla Games — discover board games, connect with friends and place your order directly.">
+  <title>Yalla Games — Play Together</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="announcement">GOOD GAMES. GREAT COMPANY. <span>LET'S PLAY.</span></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Yalla Games home"><span class="brand-mark">Y</span><span>YALLA<span class="brand-light">GAMES</span></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#games">Games</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <button class="button button-small" data-order="General order">Order now <span>↗</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span> YOUR NEXT GAME NIGHT STARTS HERE</p>
+        <h1>Less scrolling.<br><span>More playing.</span></h1>
+        <p class="hero-text">Bring your people together with games worth gathering for. Find your next favourite and let the good times roll.</p>
+        <div class="hero-actions"><a class="button" href="#games">Explore games <span>↓</span></a><button class="button button-ghost" data-order="General order">Place an order <span>↗</span></button></div>
+        <div class="hero-proof"><div class="avatar-stack"><i>🎲</i><i>♟️</i><i>🃏</i></div><p><strong>Made for game nights</strong><br><small>Friends, family & friendly rivals</small></p></div>
+      </div>
+      <div class="hero-art" aria-label="Board game inspired illustration">
+        <div class="art-glow"></div><div class="floating-tag tag-top">ROLL THE DICE ✦</div>
+        <div class="game-board"><div class="board-grid"><span>✦</span><span>●</span><span>◆</span><span>★</span><span>◆</span><span>●</span><span>♟</span><span>✦</span><span>●</span></div><div class="dice dice-one">5</div><div class="dice dice-two">2</div><div class="board-caption">YOUR MOVE.</div></div>
+        <div class="floating-tag tag-bottom">PLAY YOUR WAY ↗</div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Yalla Games highlights"><div>PLAY TOGETHER <b>✳</b> MAKE MEMORIES <b>✳</b> FRIENDLY COMPETITION <b>✳</b> GOOD VIBES ONLY <b>✳</b> PLAY TOGETHER <b>✳</b> MAKE MEMORIES <b>✳</b></div></section>
+
+    <section class="section games-section" id="games">
+      <div class="section-heading"><div><p class="eyebrow">PICK YOUR NEXT ADVENTURE</p><h2>Game on<span>.</span></h2></div><p>From quick rounds to all-night battles,<br>there's a game for every kind of crew.</p></div>
+      <div class="game-grid">
+        <article class="game-card game-purple"><div class="game-visual"><span class="visual-symbol">🎲</span><span class="visual-label">01 / CLASSIC</span></div><div class="game-info"><div><h3>Board Game Night</h3><p>Bring everyone to the table.</p></div><button class="round-arrow" data-order="Board Game Night" aria-label="Order Board Game Night">↗</button></div></article>
+        <article class="game-card game-orange"><div class="game-visual"><span class="visual-symbol">🃏</span><span class="visual-label">02 / QUICK PLAY</span></div><div class="game-info"><div><h3>Cards & Party Games</h3><p>Big laughs in every round.</p></div><button class="round-arrow" data-order="Cards & Party Games" aria-label="Order Cards and Party Games">↗</button></div></article>
+        <article class="game-card game-green"><div class="game-visual"><span class="visual-symbol">♟️</span><span class="visual-label">03 / STRATEGY</span></div><div class="game-info"><div><h3>Strategy & Puzzles</h3><p>Think ahead. Make your move.</p></div><button class="round-arrow" data-order="Strategy & Puzzles" aria-label="Order Strategy and Puzzles">↗</button></div></article>
+      </div>
+      <p class="catalog-note">Looking for a specific game? Tell us what you have in mind when you order.</p>
+    </section>
+
+    <section class="about-section" id="about"><div class="about-stamp">GOOD<br>VIBES<br>ONLY ✳</div><div><p class="eyebrow">WHY YALLA GAMES?</p><h2>It's not just<br>about the game.<br><span>It's who you play with.</span></h2><p class="about-copy">We believe the best moments happen when people put their phones down, pull up a chair and play. Yalla — let's make game night happen.</p><a class="text-link" href="#contact">Let's talk games <span>↗</span></a></div></section>
+
+    <section class="order-banner" id="contact"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2>Your next favourite<br>is one message away.</h2></div><button class="button button-light" data-order="General order">Start an order <span>↗</span></button></section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">Y</span><span>YALLA<span class="brand-light">GAMES</span></span></a><p>Good games bring people together.</p><div class="footer-contact"><a href="mailto:jabham786@gmail.com">jabham786@gmail.com</a><a href="https://wa.me/923067115462" target="_blank" rel="noopener noreferrer">WhatsApp: +92 306 7115462</a></div><small>© <span id="year"></span> Yalla Games. Let the games begin.</small></footer>
+
+  <div class="modal-backdrop" id="orderModal" hidden>
+    <section class="order-modal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+      <button class="modal-close" id="closeModal" aria-label="Close order form">×</button>
+      <p class="eyebrow">LET'S GET YOUR ORDER STARTED</p><h2 id="orderTitle">Make your move<span>.</span></h2>
+      <p class="modal-intro">Share a few details. We'll prepare your order message for WhatsApp so our team can confirm availability and pricing.</p>
+      <form id="orderForm">
+        <label for="customerName">Your name</label><input id="customerName" name="name" autocomplete="name" required placeholder="Enter your name">
+        <label for="customerPhone">Your WhatsApp number</label><input id="customerPhone" name="phone" autocomplete="tel" required placeholder="+92 3XX XXXXXXX">
+        <label for="gameChoice">What would you like?</label><input id="gameChoice" name="game" required placeholder="Game or product name">
+        <div class="form-row"><div><label for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="1" max="99" value="1" required></div><div><label for="emailAddress">Email (optional)</label><input id="emailAddress" name="email" type="email" placeholder="you@example.com"></div></div>
+        <label for="orderNotes">Extra details (optional)</label><textarea id="orderNotes" name="notes" rows="3" placeholder="Any preferences or questions?"></textarea>
+        <button class="button form-submit" type="submit">Continue to WhatsApp <span>↗</span></button>
+        <p class="form-footnote">No payment is taken here. Your order is not confirmed until Yalla Games replies.</p>
+      </form>
+    </section>
+  </div>
+
+  <aside class="chat-widget" aria-label="Yalla Order Assistant">
+    <div class="chat-panel" id="chatPanel" hidden>
+      <div class="chat-header"><div class="chat-avatar">Y</div><div><strong>Yalla Order Assistant</strong><small><span class="online-dot"></span> Here to help</small></div><button id="chatClose" aria-label="Close chat">×</button></div>
+      <div class="chat-messages" id="chatMessages" aria-live="polite"><div class="message assistant">Hey there! 👋 Welcome to Yalla Games. Looking for a game, or ready to place an order?</div></div>
+      <div class="chat-suggestions"><button data-chat="I want to place an order">Place an order</button><button data-chat="How do I contact you?">Contact details</button></div>
+      <form id="chatForm" class="chat-input"><input id="chatInput" aria-label="Type your message" placeholder="Type a message..." autocomplete="off"><button aria-label="Send message">➤</button></form>
+    </div>
+    <button class="chat-launcher" id="chatLauncher" aria-expanded="false"><span>✳</span> Chat with us</button>
+  </aside>
+</body>
+</html>
