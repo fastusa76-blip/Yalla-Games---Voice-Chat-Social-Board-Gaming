@@ -86,8 +86,11 @@ statusForm.addEventListener("submit", async event => {
   const output = document.getElementById("statusResult");
   output.textContent = "Checking order…";
   try {
-    const url = API_URL + "?action=order-status&reference=" + encodeURIComponent(reference) + "&token=" + encodeURIComponent(token);
-    const response = await fetch(url);
+    const response = await fetch(API_URL + "?action=order-status", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({reference, token})
+    });
     const result = await response.json();
     if (!response.ok || !result.ok) throw new Error(result.error || "Could not check this order.");
     output.textContent = "Order " + result.order.reference + " — " + result.order.status.toUpperCase() + (result.order.admin_note ? ". Note: " + result.order.admin_note : "");
