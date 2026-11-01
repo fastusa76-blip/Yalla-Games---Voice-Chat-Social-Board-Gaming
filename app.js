@@ -56,8 +56,10 @@ orderForm.addEventListener("submit", async event => {
     const reference = result.order.reference;
     sessionStorage.setItem("yalla-order-" + reference, result.order.access_token);
     showOrderResult("Order request saved. Reference: " + reference + ". Current status: PENDING. This is not yet a confirmed order.");
+    document.getElementById("statusReference").value = reference;
+    document.getElementById("statusToken").value = result.order.access_token;
     const track = document.createElement("p");
-    track.textContent = "Keep this reference and private access token to check your order status later.";
+    track.textContent = "Save this private access token securely. It is required to check this order from another browser or device: " + result.order.access_token;
     orderResult.append(track);
     const wa = document.createElement("a");
     wa.className = "button";
