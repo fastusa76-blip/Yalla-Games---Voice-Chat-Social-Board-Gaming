@@ -18,7 +18,7 @@
 ## API
 - `GET /api/index.php?action=health` — health/database check
 - `POST /api/index.php?action=orders` — create a pending order
-- `GET /api/index.php?action=order-status&reference=...&token=...` — private status lookup
+- `POST /api/index.php?action=order-status` — private status lookup (reference and token are sent in the JSON body)
 - `POST /api/index.php?action=chat` — server-side FAQ chatbot response
 - `GET /api/index.php?action=admin-orders` — authenticated order list
 - `POST /api/index.php?action=admin-update` — authenticated status update; statuses: confirmed, rejected, fulfilled
