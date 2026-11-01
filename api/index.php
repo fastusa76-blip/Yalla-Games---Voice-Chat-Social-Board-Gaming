@@ -119,9 +119,10 @@ try {
         ]);
     }
 
-    if ($action === 'order-status' && $method === 'GET') {
-        $reference = clean_text($_GET['reference'] ?? null, 32);
-        $token = clean_text($_GET['token'] ?? null, 100);
+    if ($action === 'order-status' && $method === 'POST') {
+        $data = body_json();
+        $reference = clean_text($data['reference'] ?? null, 32);
+        $token = clean_text($data['token'] ?? null, 100);
         if ($reference === '' || strlen($token) !== 64) respond(422, ['ok' => false, 'error' => 'Order reference and access token are required.']);
         $stmt = db()->prepare('SELECT reference, access_token_hash, game_name, quantity, status, admin_note, created_at, updated_at FROM orders WHERE reference = ? LIMIT 1');
         $stmt->execute([$reference]);
