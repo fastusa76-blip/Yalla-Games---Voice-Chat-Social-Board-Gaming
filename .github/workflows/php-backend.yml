@@ -1,0 +1,55 @@
+name: PHP backend checks
+concurrency:
+  group: php-backend-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+on:
+  push:
+    branches: [main, feature/yalla-php-backend]
+  pull_request:
+    branches: [main]
+jobs:
+  php-and-api:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: yalla_games
+          MYSQL_USER: yalla_app
+          MYSQL_PASSWORD: test-db-password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    env:
+      DB_HOST: 127.0.0.1
+      DB_NAME: yalla_games
+      DB_USER: yalla_app
+      DB_PASS: test-db-password
+      ADMIN_API_KEY: ci-test-admin-key-please-use-a-real-random-secret-123456
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql
+      - name: PHP syntax checks
+        run: |
+          find api tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Install database schema
+        run: mysql -h127.0.0.1 -uyalla_app -ptest-db-password yalla_games < database/schema.sql
+      - name: Start PHP development server
+        run: |
+          php -S 127.0.0.1:8080 -t . > /tmp/yalla-php.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:8080/api/index.php?action=health; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/yalla-php.log
+          exit 1
+      - name: API integration tests
+        run: php tests/integration.php
