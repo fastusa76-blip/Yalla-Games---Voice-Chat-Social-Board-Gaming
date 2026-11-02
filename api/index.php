@@ -10,6 +10,18 @@ header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: same-origin');
 header('Cache-Control: no-store');
 
+/** Load private hosting config when present; environment variables remain supported for CI/local use. */
+function yalla_config(string $key): string {
+    static $local = null;
+    if ($local === null) {
+        $path = __DIR__ . '/config.local.php';
+        $local = is_file($path) ? require $path : [];
+        if (!is_array($local)) $local = [];
+    }
+    $value = $local[$key] ?? getenv($key) ?: '';
+    return is_string($value) ? trim($value) : '';
+}
+
 function respond(int $status, array $payload): never {
     http_response_code($status);
     echo json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -35,10 +47,10 @@ function clean_text(mixed $value, int $max): string {
 function db(): PDO {
     static $pdo = null;
     if ($pdo instanceof PDO) return $pdo;
-    $host = getenv('DB_HOST') ?: '';
-    $name = getenv('DB_NAME') ?: '';
-    $user = getenv('DB_USER') ?: '';
-    $pass = getenv('DB_PASS') ?: '';
+    $host = yalla_config('DB_HOST');
+    $name = yalla_config('DB_NAME');
+    $user = yalla_config('DB_USER');
+    $pass = yalla_config('DB_PASS');
     if ($host === '' || $name === '' || $user === '') {
         respond(503, ['ok' => false, 'error' => 'Backend database is not configured.']);
     }
@@ -55,7 +67,7 @@ function db(): PDO {
     return $pdo;
 }
 function require_admin(): void {
-    $expected = getenv('ADMIN_API_KEY') ?: '';
+    $expected = yalla_config('ADMIN_API_KEY');
     $header = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
     $provided = str_starts_with($header, 'Bearer ') ? substr($header, 7) : '';
     if (strlen($expected) < 32 || $provided === '' || !hash_equals($expected, $provided)) {
