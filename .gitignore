@@ -40,3 +40,6 @@ google-services.json
 !.env.example
 config.php
 /config.local.php
+
+# InfinityFree/private PHP runtime configuration
+/api/config.local.php
